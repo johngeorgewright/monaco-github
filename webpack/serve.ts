@@ -7,7 +7,6 @@ interface Configuration extends WebpackConfiguration {
 
 const config: Configuration = {
   devServer: {
-    hot: true,
     static: {
       directory: './dist',
     },
