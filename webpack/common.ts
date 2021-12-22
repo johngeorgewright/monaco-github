@@ -1,18 +1,18 @@
 import * as path from 'path'
 import * as webpack from 'webpack'
-import { CleanWebpackPlugin } from 'clean-webpack-plugin'
-import ForkTSCheckerPlugin from 'fork-ts-checker-webpack-plugin'
-import MonacoEditorPlugin from 'monaco-editor-webpack-plugin'
+import CopyPlugin from 'copy-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 const config: webpack.Configuration = {
   devtool: 'source-map',
   entry: {
-    'monaco-github': './src/index.ts',
-    // 'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js',
-    // 'json.worker': 'monaco-editor/esm/vs/language/json/json.worker',
-    // 'css.worker': 'monaco-editor/esm/vs/language/css/css.worker',
-    // 'html.worker': 'monaco-editor/esm/vs/language/html/html.worker',
-    // 'ts.worker': 'monaco-editor/esm/vs/language/typescript/ts.worker',
+    editor: './src/editor.ts',
+    'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js',
+    'json.worker': 'monaco-editor/esm/vs/language/json/json.worker.js',
+    'css.worker': 'monaco-editor/esm/vs/language/css/css.worker.js',
+    'html.worker': 'monaco-editor/esm/vs/language/html/html.worker.js',
+    'ts.worker': 'monaco-editor/esm/vs/language/typescript/ts.worker.js',
+    'yaml.worker': 'monaco-yaml/lib/esm/yaml.worker.js',
   },
   module: {
     rules: [
@@ -34,6 +34,10 @@ const config: webpack.Configuration = {
         },
       },
       {
+        test: /\.s[ac]ss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
@@ -44,22 +48,22 @@ const config: webpack.Configuration = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'src/manifest.json',
+          to: 'manifest.json',
+        },
+      ],
+    }),
     new webpack.ProvidePlugin({
       process: 'process/browser',
     }),
-    new ForkTSCheckerPlugin(),
-    new MonacoEditorPlugin({
-      customLanguages: [
-        {
-          label: 'yaml',
-          entry: [],
-          worker: {
-            id: 'yaml',
-            entry: 'monaco-yaml/lib/esm/yaml.worker',
-          },
-        },
-      ],
+    new HtmlWebpackPlugin({
+      inject: false,
+      filename: 'editor.html',
+      template: './src/editor.html',
+      title: 'Monaco GitHub',
     }),
   ],
   resolve: {
@@ -69,6 +73,8 @@ const config: webpack.Configuration = {
     },
   },
   output: {
+    clean: true,
+    asyncChunks: false,
     filename: '[name].js',
     path: path.resolve(__dirname, '..', 'dist'),
   },

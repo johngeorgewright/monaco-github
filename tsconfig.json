@@ -3,7 +3,6 @@
     "declaration": true,
     "downlevelIteration": true,
     "esModuleInterop": true,
-    "jsx": "react",
     "incremental": true,
     "lib": ["dom", "es2018", "esnext.asynciterable"],
     "importHelpers": true,
