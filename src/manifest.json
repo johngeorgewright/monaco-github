@@ -5,8 +5,12 @@
   "manifest_version": 3,
   "permissions": [
     "activeTab",
+    "declarativeContent",
     "scripting"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "editor.html"
   }

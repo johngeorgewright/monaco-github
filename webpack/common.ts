@@ -6,6 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 const config: webpack.Configuration = {
   devtool: 'source-map',
   entry: {
+    background: './src/background.ts',
     editor: './src/editor/index.ts',
     'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js',
     'json.worker': 'monaco-editor/esm/vs/language/json/json.worker.js',
