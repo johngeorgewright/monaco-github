@@ -6,7 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 const config: webpack.Configuration = {
   devtool: 'source-map',
   entry: {
-    editor: './src/editor.ts',
+    editor: './src/editor/index.ts',
     'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js',
     'json.worker': 'monaco-editor/esm/vs/language/json/json.worker.js',
     'css.worker': 'monaco-editor/esm/vs/language/css/css.worker.js',
@@ -62,7 +62,7 @@ const config: webpack.Configuration = {
     new HtmlWebpackPlugin({
       inject: false,
       filename: 'editor.html',
-      template: './src/editor.html',
+      template: './src/editor/editor.html',
       title: 'Monaco GitHub',
     }),
   ],
@@ -70,6 +70,7 @@ const config: webpack.Configuration = {
     extensions: ['.ts', '.js'],
     fallback: {
       buffer: require.resolve('buffer/'),
+      path: require.resolve('path-browserify'),
     },
   },
   output: {

@@ -3,16 +3,6 @@
   "description": "Use Monaco as your GitHub editor",
   "version": "1.0",
   "manifest_version": 3,
-  "content_scripts": [
-    {
-      "matches": [
-        "https://github.com/*"
-      ],
-      "js": [
-        "edit-button.js"
-      ]
-    }
-  ],
   "permissions": [
     "activeTab",
     "scripting"

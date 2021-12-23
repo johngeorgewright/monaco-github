@@ -70,8 +70,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:96852cd4117c4378fde2b44163e7bb8de3f3da16454b8702db0bd77c769e15fe210f489203c5964c6dabf7ddac368b7a7e908d0af55a338d3c2386994f9345e4#npm:27.4.5"],
             ["jest-runner", "npm:27.4.5"],
             ["lint-staged", "npm:12.1.3"],
-            ["monaco-editor", "npm:0.31.1"],
+            ["monaco-editor", "npm:0.22.3"],
             ["monaco-yaml", "virtual:96852cd4117c4378fde2b44163e7bb8de3f3da16454b8702db0bd77c769e15fe210f489203c5964c6dabf7ddac368b7a7e908d0af55a338d3c2386994f9345e4#npm:3.2.1"],
+            ["path-browserify", "npm:1.0.1"],
             ["prettier", "npm:2.5.1"],
             ["process", "npm:0.11.10"],
             ["raw-loader", "virtual:96852cd4117c4378fde2b44163e7bb8de3f3da16454b8702db0bd77c769e15fe210f489203c5964c6dabf7ddac368b7a7e908d0af55a338d3c2386994f9345e4#npm:4.0.2"],
@@ -10895,10 +10896,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["monaco-editor", [
-        ["npm:0.31.1", {
-          "packageLocation": "./.yarn/cache/monaco-editor-npm-0.31.1-d8d5ee78bb-65be40c557.zip/node_modules/monaco-editor/",
+        ["npm:0.22.3", {
+          "packageLocation": "./.yarn/cache/monaco-editor-npm-0.22.3-4be6bdf622-15b85db4a1.zip/node_modules/monaco-editor/",
           "packageDependencies": [
-            ["monaco-editor", "npm:0.31.1"]
+            ["monaco-editor", "npm:0.22.3"]
           ],
           "linkType": "HARD",
         }]
@@ -10943,8 +10944,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:96852cd4117c4378fde2b44163e7bb8de3f3da16454b8702db0bd77c769e15fe210f489203c5964c6dabf7ddac368b7a7e908d0af55a338d3c2386994f9345e4#npm:27.4.5"],
             ["jest-runner", "npm:27.4.5"],
             ["lint-staged", "npm:12.1.3"],
-            ["monaco-editor", "npm:0.31.1"],
+            ["monaco-editor", "npm:0.22.3"],
             ["monaco-yaml", "virtual:96852cd4117c4378fde2b44163e7bb8de3f3da16454b8702db0bd77c769e15fe210f489203c5964c6dabf7ddac368b7a7e908d0af55a338d3c2386994f9345e4#npm:3.2.1"],
+            ["path-browserify", "npm:1.0.1"],
             ["prettier", "npm:2.5.1"],
             ["process", "npm:0.11.10"],
             ["raw-loader", "virtual:96852cd4117c4378fde2b44163e7bb8de3f3da16454b8702db0bd77c769e15fe210f489203c5964c6dabf7ddac368b7a7e908d0af55a338d3c2386994f9345e4#npm:4.0.2"],
@@ -10981,7 +10983,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/json-schema", "npm:7.0.9"],
             ["@types/monaco-editor", null],
             ["js-yaml", "npm:4.1.0"],
-            ["monaco-editor", "npm:0.31.1"],
+            ["monaco-editor", "npm:0.22.3"],
             ["path-browserify", "npm:1.0.1"],
             ["prettier", "npm:2.0.5"],
             ["vscode-languageserver-textdocument", "npm:1.0.3"],
