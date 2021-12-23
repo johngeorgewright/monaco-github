@@ -1,7 +1,7 @@
 import type { Editor } from 'codemirror'
 import { editor, Uri } from 'monaco-editor'
 import { setDiagnosticsOptions } from 'monaco-yaml'
-import { dirname, isAbsolute, resolve as resolvePath } from 'path'
+import { dirname, extname, isAbsolute, resolve as resolvePath } from 'path'
 import '../types/Window'
 
 export default async function prodEditor(editorElement: HTMLElement) {
@@ -34,8 +34,9 @@ export default async function prodEditor(editorElement: HTMLElement) {
 
   const uri = Uri.parse(tab.url || '://')
   const contents = await getPageValue(tab.id)
-  const schemaInfo = await getSchema(contents, uri)
-  console.info(schemaInfo)
+  const schemaInfo = /ya?ml$/.test(extname(uri.path))
+    ? await getSchema(contents, uri)
+    : undefined
 
   setDiagnosticsOptions({
     enableSchemaRequest: false,
@@ -56,6 +57,20 @@ export default async function prodEditor(editorElement: HTMLElement) {
 
   editor.create(editorElement, {
     model: editor.createModel(contents, undefined, uri),
+  })
+
+  document.getElementById('save')?.addEventListener('click', async () => {
+    const value = editor.getModel(uri)?.getValue()
+    try {
+      if (value) await setPageValue(tab.id!, value)
+      window.close()
+    } catch (error) {
+      alert('There was an error trying to save the document.')
+    }
+  })
+
+  document.getElementById('cancel')?.addEventListener('click', () => {
+    window.close()
   })
 }
 
@@ -94,6 +109,23 @@ function getPageValue(tabId: number) {
       ([{ result: editorValue }]) => {
         resolve(editorValue)
       }
+    )
+  })
+}
+
+function setPageValue(tabId: number, value: string) {
+  return new Promise<void>((resolve) => {
+    chrome.scripting.executeScript(
+      {
+        target: { tabId },
+        world: 'MAIN',
+        args: [value],
+        func: (value) =>
+          (
+            document.querySelector('.CodeMirror') as CodeMirrorElement
+          )?.CodeMirror?.setValue(value),
+      },
+      () => resolve()
     )
   })
 }
